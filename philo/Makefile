@@ -2,14 +2,15 @@ NAME = philo
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -I$(HDRS_DIR)
+CFLAGS = -Wall -Wextra -Werror -I$(HDRS_DIR) -g3 -fsanitize=address
 
 SRCS_DIR = sources/
 UTILS_DIR = sources/utils/
 HDRS_DIR = includes/headers/
 
 SRCS = $(SRCS_DIR)main.c \
-		$(UTILS_DIR)ft_atoi.c
+		$(UTILS_DIR)ft_atoi.c \
+		$(SRCS_DIR)alloc_init.c
 
 HDRS = $(HDRS_DIR)philo.h
 
