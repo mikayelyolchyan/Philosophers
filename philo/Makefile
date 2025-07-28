@@ -5,9 +5,11 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address -I$(HDRS_DIR)
 
 SRCS_DIR = sources/
+UTILS_DIR = sources/utils/
 HDRS_DIR = includes/headers/
 
-SRCS = $(SRCS_DIR)main.c
+SRCS = $(SRCS_DIR)main.c \
+		$(UTILS_DIR)ft_atoi.c
 
 HDRS = $(HDRS_DIR)philo.h
 
