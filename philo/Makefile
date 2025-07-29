@@ -9,8 +9,15 @@ UTILS_DIR = sources/utils/
 HDRS_DIR = includes/headers/
 
 SRCS = $(SRCS_DIR)main.c \
+		$(SRCS_DIR)alloc_init.c \
+		$(SRCS_DIR)free.c \
+		$(SRCS_DIR)create_join.c \
 		$(UTILS_DIR)ft_atoi.c \
-		$(SRCS_DIR)alloc_init.c
+		$(UTILS_DIR)ft_putchar_fd.c \
+		$(UTILS_DIR)ft_putendl_fd.c \
+		$(UTILS_DIR)ft_putnbr_fd.c \
+		$(UTILS_DIR)ft_putstr_fd.c \
+		$(UTILS_DIR)ft_strlen.c
 
 HDRS = $(HDRS_DIR)philo.h
 

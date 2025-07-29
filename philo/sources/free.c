@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.h                                          :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 18:43:52 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/29 17:04:12 by miyolchy         ###   ########.fr       */
+/*   Created: 2025/07/29 18:46:14 by miyolchy          #+#    #+#             */
+/*   Updated: 2025/07/29 18:51:42 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HELPERS_H
-# define HELPERS_H
+#include "../includes/headers/philo.h"
 
-# include <unistd.h>
-# include <limits.h>
-
-size_t	ft_strlen(const char *str);
-
-int		ft_atoi(const char *nptr);
-
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putnbr_fd(int n, int fd);
-
-#endif
+void	ending_free(t_data *data)
+{
+	free(data->philos);
+	free(data->forks);
+	free(data->threads);
+}

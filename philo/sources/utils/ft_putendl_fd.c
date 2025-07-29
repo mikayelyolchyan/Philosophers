@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.h                                          :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 18:43:52 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/29 17:04:12 by miyolchy         ###   ########.fr       */
+/*   Created: 2025/07/29 17:00:15 by miyolchy          #+#    #+#             */
+/*   Updated: 2025/07/29 17:01:02 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HELPERS_H
-# define HELPERS_H
+#include "../../includes/headers/helpers.h"
 
-# include <unistd.h>
-# include <limits.h>
-
-size_t	ft_strlen(const char *str);
-
-int		ft_atoi(const char *nptr);
-
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putnbr_fd(int n, int fd);
-
-#endif
+void	ft_putendl_fd(char *s, int fd)
+{
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
+}

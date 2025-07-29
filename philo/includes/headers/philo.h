@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:43:50 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/28 21:03:29 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/29 18:48:32 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,18 @@ typedef struct s_data
 	int					must_eat;
 	int					start_time;
 	int					someone_died;
+	pthread_t			*threads;
+	pthread_mutex_t		start_mutex;
 	pthread_mutex_t		*forks;
 	pthread_mutex_t		print_mutex;
 	t_philo				*philos;
 }	t_data;
 
 bool	allocation(t_data *data);
-void	initialization(t_data *data);
+bool	initializations(t_data *data);
+
+void	ending_free(t_data *data);
+
+bool	create_and_join_threads(t_data *data);
 
 #endif
