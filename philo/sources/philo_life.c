@@ -6,13 +6,13 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 20:21:34 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/30 22:48:06 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/31 00:38:44 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/philo.h"
 
-long	get_time_in_ms(void)
+unsigned long long	get_time_in_ms(void)
 {
     struct timeval	tv;
     gettimeofday(&tv, NULL);
@@ -33,9 +33,12 @@ bool	philo_alive(t_philo *philo)
 {
 	if ((get_time_in_ms() - philo->last_meal_time) > philo->data->time_to_die)
 	{
+		philo->data->someone_died = true;
 		philo_print(philo, " is die");
 		return (false);
 	}
+	if (philo->data->someone_died == true)
+		return (false);
 	return (true);
 }
 
@@ -85,7 +88,7 @@ bool	philo_eat_time_control(t_philo *philo)
     {
         if (philo_alive(philo) == false)
             return (false);
-        usleep(500); // маленькая пауза, чтобы не грузить процессор
+        //usleep(500); // маленькая пауза, чтобы не грузить процессор
     }
 	return (true);
 }
@@ -99,7 +102,7 @@ bool	philo_sleep_time_control(t_philo *philo)
     {
         if (philo_alive(philo) == false)
             return (false);
-        usleep(500); // маленькая пауза, чтобы не грузить процессор
+        //usleep(500); // маленькая пауза, чтобы не грузить процессор
     }
 	return (true);
 }
@@ -118,7 +121,7 @@ void	philo_life(t_philo *philo)
 		if (philo_sleep_time_control(philo) == false)
 			break ;
 		philo_print(philo, " is thinking");
-		usleep(500);
+		//usleep(500);
 	}
 }
 

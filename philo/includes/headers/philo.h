@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:43:50 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/30 21:47:49 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/31 00:24:09 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_philo
 {
 	int					id;
 	int					meals_eaten;
-	int					last_meal_time;
+	unsigned long long	last_meal_time;
 	pthread_mutex_t		*left_fork;
 	pthread_mutex_t		*right_fork;
 	struct s_data		*data;
@@ -33,12 +33,12 @@ typedef struct s_philo
 typedef struct s_data
 {
 	int					num_philos;
-	int					time_to_die;
-	int					time_to_eat;
-	int					time_to_sleep;
-	int					must_eat;
-	int					start_time;
-	int					someone_died;
+	unsigned long long	time_to_die;
+	unsigned long long	time_to_eat;
+	unsigned long long	time_to_sleep;
+	unsigned long long	must_eat;
+	unsigned long long	start_time;
+	bool				someone_died;
 	pthread_t			*threads;
 	pthread_mutex_t		start_mutex;
 	pthread_mutex_t		*forks;
@@ -55,6 +55,6 @@ bool	create_and_join_threads(t_data *data);
 
 void	*philo_life_start(void *arg);
 
-long	get_time_in_ms(void);
+unsigned long long	get_time_in_ms(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:43:47 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/29 19:23:34 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/31 00:34:56 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_data(t_data *data)
 	{
 		printf("id = %d\n", data->philos[i].id);
 		printf("meals_eaten = %d\n", data->philos[i].meals_eaten);
-		printf("last_meal_time = %d\n", data->philos[i].last_meal_time);
+		printf("last_meal_time = %lld\n", data->philos[i].last_meal_time);
 		printf("left_fork = %p\n", data->philos[i].left_fork);
 		printf("right_fort = %p\n", data->philos[i].right_fork);
 		printf("data = %p\n", data->philos[i].data);
@@ -38,6 +38,7 @@ void	parse_args(t_data *data, char **argv)
 	data->time_to_sleep = ft_atoi(argv[4]);
 	if (argv[5] != NULL)
 		data->must_eat = ft_atoi(argv[5]);
+	data->someone_died = false;
 }
 
 int	main(int argc, char **argv)
