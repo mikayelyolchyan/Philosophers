@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:43:50 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/29 18:48:32 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/30 21:47:49 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <stdlib.h>
+# include <sys/time.h>
 
 typedef struct s_philo
 {
@@ -45,11 +46,15 @@ typedef struct s_data
 	t_philo				*philos;
 }	t_data;
 
-bool	allocation(t_data *data);
+bool	allocations(t_data *data);
 bool	initializations(t_data *data);
 
 void	ending_free(t_data *data);
 
 bool	create_and_join_threads(t_data *data);
+
+void	*philo_life_start(void *arg);
+
+long	get_time_in_ms(void);
 
 #endif

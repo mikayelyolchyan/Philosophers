@@ -6,14 +6,14 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:02:30 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/29 18:50:06 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:36:22 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/headers/philo.h"
 #include "../includes/headers/helpers.h"
 
-bool	allocation(t_data *data)
+bool	allocations(t_data *data)
 {
 	data->philos = malloc(sizeof(t_philo) * data->num_philos);
 	data->forks = malloc(sizeof(pthread_mutex_t) * data->num_philos);
@@ -24,11 +24,6 @@ bool	allocation(t_data *data)
 		return (false);
 	}
 	return (true);
-}
-
-void	init_data(t_data *data)
-{
-	data->must_eat = 0;
 }
 
 void	init_philos(t_data *data)
@@ -62,6 +57,9 @@ bool	mutex_init(t_data *data)
 	err = pthread_mutex_init(&data->start_mutex, NULL);
 	if (err != 0)
 		return (ft_putnbr_fd(err, 2), false);
+	err = pthread_mutex_init(&data->print_mutex, NULL);
+	if (err != 0)
+		return (ft_putnbr_fd(err, 2), false);
 	return (true);
 }
 
@@ -69,7 +67,6 @@ bool	initializations(t_data *data)
 {
 	if (mutex_init(data) == false)
 		return (ft_putendl_fd(" :mutex init error", 2), false);
-	init_data(data);
 	init_philos(data);
 	return (true);
 }

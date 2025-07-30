@@ -12,6 +12,7 @@ SRCS = $(SRCS_DIR)main.c \
 		$(SRCS_DIR)alloc_init.c \
 		$(SRCS_DIR)free.c \
 		$(SRCS_DIR)create_join.c \
+		$(SRCS_DIR)philo_life.c \
 		$(UTILS_DIR)ft_atoi.c \
 		$(UTILS_DIR)ft_putchar_fd.c \
 		$(UTILS_DIR)ft_putendl_fd.c \

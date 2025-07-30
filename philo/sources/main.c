@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:43:47 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/29 18:48:50 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/29 19:23:34 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 void	print_data(t_data *data)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (i < data->num_philos)
 	{
 		printf("id = %d\n", data->philos[i].id);
@@ -29,15 +30,24 @@ void	print_data(t_data *data)
 	}
 }
 
+void	parse_args(t_data *data, char **argv)
+{
+	data->num_philos = ft_atoi(argv[1]);
+	data->time_to_die = ft_atoi(argv[2]);
+	data->time_to_eat = ft_atoi(argv[3]);
+	data->time_to_sleep = ft_atoi(argv[4]);
+	if (argv[5] != NULL)
+		data->must_eat = ft_atoi(argv[5]);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	
 
 	if (argc != 5 && argc != 6)
-		return (write(2, "Incorrect number of arguments\n", 30), 1);
-	data.num_philos = ft_atoi(argv[1]);
-	if (allocation(&data) == false)
+		return (ft_putendl_fd("Incorrect number of arguments\n", 2), 1);
+	parse_args(&data, argv);
+	if (allocations(&data) == false)
 		return (ft_putendl_fd("Allocation error", 2), 1);
 	if (initializations(&data) == false)
 	{
