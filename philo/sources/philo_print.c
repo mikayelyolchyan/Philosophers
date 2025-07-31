@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.h                                          :+:      :+:    :+:   */
+/*   philo_print.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 18:43:52 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 20:11:21 by miyolchy         ###   ########.fr       */
+/*   Created: 2025/07/31 17:00:12 by miyolchy          #+#    #+#             */
+/*   Updated: 2025/07/31 17:00:24 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HELPERS_H
-# define HELPERS_H
+#include "../includes/headers/philo.h"
 
-# include <unistd.h>
-# include <limits.h>
+void	philo_print(t_philo *philo, const char *str)
+{
+	long timestamp;
 
-size_t	ft_strlen(const char *str);
-
-int		ft_atoll(const char *nptr);
-
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putnbr_fd(int n, int fd);
-
-#endif
+	pthread_mutex_lock(&philo->data->print_mutex);
+	timestamp = get_time_in_ms() - philo->data->start_time;
+	printf("%ld %d %s\n", timestamp, philo->id, str);
+	pthread_mutex_unlock(&philo->data->print_mutex);
+}

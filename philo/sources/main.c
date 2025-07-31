@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:43:47 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 00:34:56 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/31 20:07:39 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,15 @@ void	print_data(t_data *data)
 	}
 }
 
-void	parse_args(t_data *data, char **argv)
-{
-	data->num_philos = ft_atoi(argv[1]);
-	data->time_to_die = ft_atoi(argv[2]);
-	data->time_to_eat = ft_atoi(argv[3]);
-	data->time_to_sleep = ft_atoi(argv[4]);
-	if (argv[5] != NULL)
-		data->must_eat = ft_atoi(argv[5]);
-	data->someone_died = false;
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
 	if (argc != 5 && argc != 6)
-		return (ft_putendl_fd("Incorrect number of arguments\n", 2), 1);
-	parse_args(&data, argv);
+		return (ft_putendl_fd("Incorrect number of arguments", 2), 1);
+	memset(&data, 0, sizeof(t_data));
+	if (parse_args(&data, argv) == false)
+		return (1);
 	if (allocations(&data) == false)
 		return (ft_putendl_fd("Allocation error", 2), 1);
 	if (initializations(&data) == false)
@@ -55,8 +46,11 @@ int	main(int argc, char **argv)
 		ending_free(&data);
 		return (1);
 	}
-	create_and_join_threads(&data);
 	//print_data(&data);
+	create_and_join_threads(&data);
+	if (ending_destroy(&data) == false)
+		return (ft_putendl_fd(" :Mutex destroy error", 2), \
+				ending_free(&data), 1);
 	ending_free(&data);
 	return (0);
 }

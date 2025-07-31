@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:39:09 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/30 22:51:34 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/31 19:36:30 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,19 @@ bool	create_and_join_threads(t_data *data)
 	pthread_t	*threads;
 
 	threads = data->threads;
+	if (data->num_philos == 1)
+	{
+		data->start_time = get_time_in_ms();
+		if (one_philo(data) == false)
+			return (false);
+		return (true);
+	}
 	pthread_mutex_lock(&data->start_mutex);
 	if (create_threads(data, threads) == false)
 		return (false);
-	usleep(1000000);
-	pthread_mutex_unlock(&data->start_mutex);
+	usleep(data->num_philos * 10000);
 	data->start_time = get_time_in_ms();
+	pthread_mutex_unlock(&data->start_mutex);
 	join_threads(data, threads);
 	return (true);
 }

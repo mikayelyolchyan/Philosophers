@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helpers.h                                          :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 18:43:52 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 20:11:21 by miyolchy         ###   ########.fr       */
+/*   Created: 2025/07/31 16:59:44 by miyolchy          #+#    #+#             */
+/*   Updated: 2025/07/31 16:59:46 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HELPERS_H
-# define HELPERS_H
+#include "../includes/headers/philo.h"
 
-# include <unistd.h>
-# include <limits.h>
-
-size_t	ft_strlen(const char *str);
-
-int		ft_atoll(const char *nptr);
-
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putnbr_fd(int n, int fd);
-
-#endif
+unsigned long long	get_time_in_ms(void)
+{
+    struct timeval	tv;
+    gettimeofday(&tv, NULL);
+    return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}

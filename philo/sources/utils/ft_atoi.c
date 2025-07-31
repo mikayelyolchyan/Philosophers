@@ -6,17 +6,17 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:55:24 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/28 21:01:52 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/31 20:11:10 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/headers/helpers.h"
 
-int	ft_atoi(const char *nptr)
+int	ft_atoll(const char *nptr)
 {
-	int	i;
-	int	sign;
-	int	result;
+	int					i;
+	int					sign;
+	unsigned long long	result;
 
 	i = 0;
 	sign = 1;
