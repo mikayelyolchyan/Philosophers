@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 20:21:34 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 18:48:35 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/31 21:14:25 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,21 @@
 
 bool	philo_alive(t_philo *philo)
 {
+	bool	died;
+
+	pthread_mutex_lock(&philo->data->someone_died_mutex);
+    died = philo->data->someone_died;
+    pthread_mutex_unlock(&philo->data->someone_died_mutex);
 	if ((get_time_in_ms() - philo->last_meal_time) > philo->data->time_to_die)
 	{
-		philo->data->someone_died = true;
+		pthread_mutex_lock(&philo->data->someone_died_mutex);
+        philo->data->someone_died = true;
+        pthread_mutex_unlock(&philo->data->someone_died_mutex);
 		philo_print(philo, "died");
 		philo_put_down_fork(philo);
 		return (false);
 	}
-	if (philo->data->someone_died == true)
+	if (died)
 	{
 		philo_put_down_fork(philo);
 		return (false);

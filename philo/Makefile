@@ -2,7 +2,7 @@ NAME = philo
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I$(HDRS_DIR) #-g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I$(HDRS_DIR) -g3 -fsanitize=thread
 
 SRCS_DIR = sources/
 UTILS_DIR = sources/utils/

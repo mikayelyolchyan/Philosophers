@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:02:30 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 18:15:58 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/31 21:15:19 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ bool	mutex_init(t_data *data)
 	if (err != 0)
 		return (ft_putnbr_fd(err, 2), false);
 	err = pthread_mutex_init(&data->print_mutex, NULL);
+	if (err != 0)
+		return (ft_putnbr_fd(err, 2), false);
+	err = pthread_mutex_init(&data->someone_died_mutex, NULL);
 	if (err != 0)
 		return (ft_putnbr_fd(err, 2), false);
 	return (true);

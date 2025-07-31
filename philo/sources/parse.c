@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 16:57:39 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 20:15:23 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/31 20:18:03 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	is_valid(char **argv)
 				return (false);
 			i++;
 		}
-		if (ft_strlen(argv[args]) > 12)
+		if (ft_strlen(argv[args]) > 10)
 			return (false);
 		l = ft_atoll(argv[args]);
 		if (l > INT_MAX || l < 0)

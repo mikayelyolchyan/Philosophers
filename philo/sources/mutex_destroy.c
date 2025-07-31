@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 16:58:35 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 19:45:47 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/31 21:16:00 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ bool	ending_destroy(t_data *data)
 	if (err != 0)
 		return (ft_putnbr_fd(err, 2), false);
 	err = pthread_mutex_destroy(&data->print_mutex);
+	if (err != 0)
+		return (ft_putnbr_fd(err, 2), false);
+	err = pthread_mutex_destroy(&data->someone_died_mutex);
 	if (err != 0)
 		return (ft_putnbr_fd(err, 2), false);
 	return (true);

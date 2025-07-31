@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:43:50 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 20:07:22 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/07/31 21:15:33 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_data
 	unsigned long long		time_to_sleep;
 	unsigned long long		start_time;
 	bool					someone_died;
+	pthread_mutex_t			someone_died_mutex;
 	pthread_t				*threads;
 	pthread_mutex_t			start_mutex;
 	pthread_mutex_t			*forks;
