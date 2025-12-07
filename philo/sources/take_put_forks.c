@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 17:01:07 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/12/07 20:04:19 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/12/07 22:25:58 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ bool	get_someone_died(t_data *data)
 
 void	philo_take_fork(t_philo *philo)
 {
+	if (philo->data->num_philos % 2 != 0 && philo->id % 2 == 1)
+		usleep(100);
+	else if (philo->data->num_philos % 2 == 0 && philo->id % 2 == 0)
+		usleep(100);
 	if (philo->id % 2 == 1)
 		take_odd_forks(philo);
 	else
