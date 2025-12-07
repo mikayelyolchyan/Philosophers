@@ -2,7 +2,7 @@ NAME = philo
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I$(HDRS_DIR) -g3 -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -I$(HDRS_DIR)
 
 SRCS_DIR = sources/
 UTILS_DIR = sources/utils/
@@ -18,6 +18,7 @@ SRCS = $(SRCS_DIR)main.c \
 		$(SRCS_DIR)parse.c \
 		$(SRCS_DIR)philo_print.c \
 		$(SRCS_DIR)take_put_forks.c \
+		$(SRCS_DIR)fork_helpers.c \
 		$(SRCS_DIR)time_control.c \
 		$(SRCS_DIR)time.c \
 		$(UTILS_DIR)ft_atoi.c \
@@ -25,7 +26,8 @@ SRCS = $(SRCS_DIR)main.c \
 		$(UTILS_DIR)ft_putendl_fd.c \
 		$(UTILS_DIR)ft_putnbr_fd.c \
 		$(UTILS_DIR)ft_putstr_fd.c \
-		$(UTILS_DIR)ft_strlen.c
+		$(UTILS_DIR)ft_strlen.c \
+		$(UTILS_DIR)ft_strncmp.c
 
 HDRS = $(HDRS_DIR)philo.h
 

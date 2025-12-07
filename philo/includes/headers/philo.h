@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:43:50 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 21:15:33 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/12/07 20:04:19 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,34 +50,25 @@ typedef struct s_data
 	t_philo					*philos;
 }	t_data;
 
-bool	allocations(t_data *data);
-bool	initializations(t_data *data);
-
-void	ending_free(t_data *data);
-
-bool	create_and_join_threads(t_data *data);
-
-void	*philo_life_start(void *arg);
-
+bool				allocations(t_data *data);
+bool				initializations(t_data *data);
+void				ending_free(t_data *data);
+bool				create_and_join_threads(t_data *data);
+void				*philo_life_start(void *arg);
 unsigned long long	get_time_in_ms(void);
-
-bool	one_philo(t_data *data);
-
-bool	philo_eat_time_control(t_philo *philo);
-
-bool	philo_alive(t_philo *philo);
-
-void	philo_print(t_philo *philo, const char *str);
-
-bool	parse_args(t_data *data, char **argv);
-
-bool	ending_destroy(t_data *data);
-
-void	philo_take_fork(t_philo *philo);
-void	philo_put_down_fork(t_philo *philo);
-
-bool	philo_eat_time_control(t_philo *philo);
-bool	philo_sleep_time_control(t_philo *philo);
-
+bool				one_philo(t_data *data);
+bool				philo_eat_time_control(t_philo *philo);
+bool				philo_alive(t_philo *philo);
+void				philo_print(t_philo *philo, const char *str);
+bool				parse_args(t_data *data, char **argv);
+bool				ending_destroy(t_data *data);
+void				philo_take_fork(t_philo *philo);
+void				philo_put_down_fork(t_philo *philo);
+bool				get_someone_died(t_data *data);
+bool				take_odd_forks(t_philo *philo);
+bool				take_even_forks(t_philo *philo);
+void				put_down_odd_forks(t_philo *philo);
+void				put_down_even_forks(t_philo *philo);
+bool				philo_sleep_time_control(t_philo *philo);
 
 #endif

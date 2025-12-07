@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/31 16:59:44 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/12/07 19:55:58 by miyolchy         ###   ########.fr       */
+/*   Created: 2025/12/07 19:48:31 by miyolchy          #+#    #+#             */
+/*   Updated: 2025/12/07 19:56:16 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/headers/philo.h"
+#include "../../includes/headers/helpers.h"
 
-unsigned long long	get_time_in_ms(void)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	struct timeval	tv;
+	size_t	i;
 
-	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+	i = 0;
+	while (i < n && s1[i] == s2[i] && s1[i])
+		i++;
+	if (i == n)
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

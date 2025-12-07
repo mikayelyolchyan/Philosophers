@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 18:43:47 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 20:07:39 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/12/07 19:37:07 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	main(int argc, char **argv)
 		ending_free(&data);
 		return (1);
 	}
-	//print_data(&data);
 	create_and_join_threads(&data);
 	if (ending_destroy(&data) == false)
 		return (ft_putendl_fd(" :Mutex destroy error", 2), \

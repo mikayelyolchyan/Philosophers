@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 20:21:34 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 21:14:25 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/12/07 19:38:25 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ bool	philo_alive(t_philo *philo)
 	bool	died;
 
 	pthread_mutex_lock(&philo->data->someone_died_mutex);
-    died = philo->data->someone_died;
-    pthread_mutex_unlock(&philo->data->someone_died_mutex);
-	if ((get_time_in_ms() - philo->last_meal_time) > philo->data->time_to_die)
+	died = philo->data->someone_died;
+	if (died == false && \
+		((get_time_in_ms() - philo->last_meal_time) > philo->data->time_to_die))
 	{
-		pthread_mutex_lock(&philo->data->someone_died_mutex);
-        philo->data->someone_died = true;
-        pthread_mutex_unlock(&philo->data->someone_died_mutex);
+		philo->data->someone_died = true;
+		pthread_mutex_unlock(&philo->data->someone_died_mutex);
 		philo_print(philo, "died");
 		philo_put_down_fork(philo);
 		return (false);
 	}
+	pthread_mutex_unlock(&philo->data->someone_died_mutex);
 	if (died)
 	{
 		philo_put_down_fork(philo);

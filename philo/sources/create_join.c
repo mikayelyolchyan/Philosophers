@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:39:09 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 19:36:30 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/12/07 19:36:46 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	create_threads(t_data *data, pthread_t *threads)
 
 bool	join_threads(t_data *data, pthread_t *threads)
 {
-	int err;
+	int	err;
 	int	i;
 
 	i = -1;

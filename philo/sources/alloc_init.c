@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/28 21:02:30 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 21:15:19 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/12/07 19:36:22 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	init_philos(t_data *data)
 
 bool	mutex_init_err(t_data *data, int i)
 {
-	int err;
+	int	err;
 
 	while (--i >= 0)
 	{

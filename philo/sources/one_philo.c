@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 15:57:28 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/07/31 16:34:26 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/12/07 19:37:38 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	*one_philo_life_start(void *arg)
 {
-	t_philo *philo;
-	
+	t_philo	*philo;
+
 	philo = (t_philo *)arg;
 	philo->last_meal_time = philo->data->start_time;
 	while (philo_alive(philo))
