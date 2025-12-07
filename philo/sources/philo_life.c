@@ -6,7 +6,7 @@
 /*   By: miyolchy <miyolchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 20:21:34 by miyolchy          #+#    #+#             */
-/*   Updated: 2025/12/07 19:38:25 by miyolchy         ###   ########.fr       */
+/*   Updated: 2025/12/07 20:46:30 by miyolchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void	philo_life(t_philo *philo)
 	while (philo_alive(philo))
 	{
 		philo_take_fork(philo);
-		philo->last_meal_time = get_time_in_ms();
 		philo_print(philo, "is eating");
 		if (philo_eat_time_control(philo) == false)
 			break ;
+		philo->last_meal_time = get_time_in_ms();
 		philo_put_down_fork(philo);
 		philo->meals_eaten++;
 		if (philo->meals_eaten == philo->data->must_eat)
