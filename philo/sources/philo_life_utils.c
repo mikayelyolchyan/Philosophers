@@ -39,7 +39,10 @@ void	apply_tight_delay(t_philo *philo)
 
 	slack = philo->data->time_to_die - (philo->data->time_to_eat
 			+ philo->data->time_to_sleep);
-	if (slack < (long)philo->data->time_to_sleep
+	if (slack < 0)
+		usleep(((philo->data->time_to_sleep + philo->data->time_to_eat) * 1000)
+			+ 1000);
+	else if (slack < (long)philo->data->time_to_sleep
 		&& (philo->data->num_philos % 2 == 1
 			|| philo->data->time_to_sleep < philo->data->time_to_eat))
 		usleep(((philo->data->time_to_sleep + philo->data->time_to_eat) * 1000)
