@@ -66,6 +66,10 @@ bool	mutex_init(t_data *data)
 	err = pthread_mutex_init(&data->ready_mutex, NULL);
 	if (err != 0)
 		return (ft_putnbr_fd(err, 2), false);
+	err = pthread_mutex_init(&data->waiter_mutex, NULL);
+	if (err != 0)
+		return (ft_putnbr_fd(err, 2), false);
 	data->ready_count = 0;
+	data->eating_count = 0;
 	return (true);
 }

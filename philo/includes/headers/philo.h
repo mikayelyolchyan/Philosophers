@@ -44,8 +44,10 @@ typedef struct s_data
 	unsigned long long		start_time;
 	bool					someone_died;
 	int						ready_count;
+	int						eating_count;
 	pthread_mutex_t			ready_mutex;
 	pthread_mutex_t			someone_died_mutex;
+	pthread_mutex_t			waiter_mutex;
 	pthread_t				*threads;
 	pthread_mutex_t			start_mutex;
 	pthread_mutex_t			*forks;
@@ -69,13 +71,19 @@ bool				ending_destroy(t_data *data);
 bool				philo_take_fork(t_philo *philo);
 void				philo_put_down_fork(t_philo *philo);
 bool				get_someone_died(t_data *data);
-bool				take_odd_forks(t_philo *philo);
-bool				take_even_forks(t_philo *philo);
-void				put_down_odd_forks(t_philo *philo);
-void				put_down_even_forks(t_philo *philo);
+void				waiter_exit(t_philo *philo);
+void				choose_forks(t_philo *philo,
+						pthread_mutex_t **first,
+						pthread_mutex_t **second);
+bool				lock_second_fork(t_philo *philo,
+						pthread_mutex_t *first,
+						pthread_mutex_t *second);
+bool			perform_meal(t_philo *philo);
+void			finish_meal(t_philo *philo);
+bool			reached_meal_goal(t_philo *philo);
+void			apply_tight_delay(t_philo *philo);
+void			apply_odd_delay(t_philo *philo);
 bool				philo_sleep_time_control(t_philo *philo);
 void				*death_monitor(void *arg);
-bool				try_lock_second_fork(pthread_mutex_t *fork, t_philo *philo);
-void				release_forks_on_death(t_philo *philo);
 
 #endif

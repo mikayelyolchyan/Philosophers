@@ -22,18 +22,51 @@ bool	get_someone_died(t_data *data)
 	return (val);
 }
 
+void	waiter_exit(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->waiter_mutex);
+	philo->data->eating_count--;
+	pthread_mutex_unlock(&philo->data->waiter_mutex);
+}
+
+static bool	waiter_enter(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data->waiter_mutex);
+	if (get_someone_died(philo->data))
+	{
+		pthread_mutex_unlock(&philo->data->waiter_mutex);
+		return (false);
+	}
+	philo->data->eating_count++;
+	pthread_mutex_unlock(&philo->data->waiter_mutex);
+	return (true);
+}
+
 bool	philo_take_fork(t_philo *philo)
 {
-	if (philo->id % 2 == 1)
-		return (take_odd_forks(philo));
-	else
-		return (take_even_forks(philo));
+	pthread_mutex_t	*first;
+	pthread_mutex_t	*second;
+
+	if (waiter_enter(philo) == false)
+		return (false);
+	if (philo->data->num_philos % 2 == 1
+		&& philo->id == philo->data->num_philos)
+		usleep(150);
+	choose_forks(philo, &first, &second);
+	pthread_mutex_lock(first);
+	philo_print(philo, "has taken a fork");
+	if (get_someone_died(philo->data))
+	{
+		pthread_mutex_unlock(first);
+		waiter_exit(philo);
+		return (false);
+	}
+	return (lock_second_fork(philo, first, second));
 }
 
 void	philo_put_down_fork(t_philo *philo)
 {
-	if (philo->id % 2 == 1)
-		put_down_odd_forks(philo);
-	else
-		put_down_even_forks(philo);
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
+	waiter_exit(philo);
 }

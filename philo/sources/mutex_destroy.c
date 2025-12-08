@@ -47,6 +47,9 @@ static bool	destroy_global_mutexes(t_data *data)
 	err = pthread_mutex_destroy(&data->ready_mutex);
 	if (err != 0)
 		return (ft_putnbr_fd(err, 2), false);
+	err = pthread_mutex_destroy(&data->waiter_mutex);
+	if (err != 0)
+		return (ft_putnbr_fd(err, 2), false);
 	return (true);
 }
 

@@ -22,48 +22,22 @@ bool	philo_alive(t_philo *philo)
 	return (!died);
 }
 
-static void	finish_meal(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->meal_mutex);
-	philo->meals_eaten++;
-	if (philo->data->must_eat != -1
-		&& philo->meals_eaten == philo->data->must_eat)
-	{
-		pthread_mutex_unlock(&philo->meal_mutex);
-		pthread_mutex_lock(&philo->data->someone_died_mutex);
-		philo->data->someone_died = true;
-		pthread_mutex_unlock(&philo->data->someone_died_mutex);
-	}
-	else
-		pthread_mutex_unlock(&philo->meal_mutex);
-}
-
 void	philo_life(t_philo *philo)
 {
 	while (philo_alive(philo))
 	{
-		if (philo_take_fork(philo) == false)
+		if (perform_meal(philo) == false)
 			break ;
-		pthread_mutex_lock(&philo->meal_mutex);
-		philo->last_meal_time = get_time_in_ms();
-		pthread_mutex_unlock(&philo->meal_mutex);
-		philo_print(philo, "is eating");
-		if (philo_eat_time_control(philo) == false)
-		{
-			philo_put_down_fork(philo);
-			break ;
-		}
-		philo_put_down_fork(philo);
-		finish_meal(philo);
-		if (philo->data->must_eat != -1
-			&& !philo_alive(philo))
+		if (reached_meal_goal(philo))
 			break ;
 		philo_print(philo, "is sleeping");
 		if (philo_sleep_time_control(philo) == false)
 			break ;
+		apply_tight_delay(philo);
+		apply_odd_delay(philo);
 		philo_print(philo, "is thinking");
 		if (philo->data->num_philos % 2 == 1)
-			usleep(1000);
+			usleep(300);
 	}
 }
 
@@ -74,6 +48,8 @@ void	*philo_life_start(void *arg)
 	philo = (t_philo *)arg;
 	pthread_mutex_lock(&philo->data->start_mutex);
 	pthread_mutex_unlock(&philo->data->start_mutex);
+	if (philo->id % 2 == 0)
+		usleep(500);
 	philo->last_meal_time = philo->data->start_time;
 	pthread_mutex_lock(&philo->data->ready_mutex);
 	philo->data->ready_count++;
