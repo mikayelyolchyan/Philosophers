@@ -23,6 +23,12 @@ static bool	check_philo_death(t_philo *philo)
 		return (true);
 	}
 	pthread_mutex_lock(&philo->meal_mutex);
+	if (philo->data->must_eat != -1 && philo->meals_eaten >= philo->data->must_eat)
+	{
+		pthread_mutex_unlock(&philo->meal_mutex);
+		pthread_mutex_unlock(&philo->data->someone_died_mutex);
+		return (false);
+	}
 	time_diff = get_time_in_ms() - philo->last_meal_time;
 	pthread_mutex_unlock(&philo->meal_mutex);
 	if (time_diff > philo->data->time_to_die)
@@ -47,8 +53,10 @@ static bool	check_meals_done(t_data *data)
 	i = -1;
 	while (++i < data->num_philos)
 	{
+		pthread_mutex_lock(&data->philos[i].meal_mutex);
 		if (data->philos[i].meals_eaten >= data->must_eat)
 			finished++;
+		pthread_mutex_unlock(&data->philos[i].meal_mutex);
 	}
 	if (finished == data->num_philos)
 	{
