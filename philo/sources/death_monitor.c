@@ -47,8 +47,10 @@ static bool	check_meals_done(t_data *data)
 	i = -1;
 	while (++i < data->num_philos)
 	{
+		pthread_mutex_lock(&data->philos[i].meal_mutex);
 		if (data->philos[i].meals_eaten >= data->must_eat)
 			finished++;
+		pthread_mutex_unlock(&data->philos[i].meal_mutex);
 	}
 	if (finished == data->num_philos)
 	{
@@ -81,14 +83,14 @@ static void	monitor_loop(t_data *data)
 
 	while (1)
 	{
+		if (check_meals_done(data))
+			return ;
 		i = -1;
 		while (++i < data->num_philos)
 		{
 			if (check_philo_death(&data->philos[i]))
 				return ;
 		}
-		if (check_meals_done(data))
-			return ;
 		usleep(1000);
 	}
 }

@@ -22,6 +22,22 @@ bool	philo_alive(t_philo *philo)
 	return (!died);
 }
 
+static void	finish_meal(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->meal_mutex);
+	philo->meals_eaten++;
+	if (philo->data->must_eat != -1
+		&& philo->meals_eaten == philo->data->must_eat)
+	{
+		pthread_mutex_unlock(&philo->meal_mutex);
+		pthread_mutex_lock(&philo->data->someone_died_mutex);
+		philo->data->someone_died = true;
+		pthread_mutex_unlock(&philo->data->someone_died_mutex);
+	}
+	else
+		pthread_mutex_unlock(&philo->meal_mutex);
+}
+
 void	philo_life(t_philo *philo)
 {
 	while (philo_alive(philo))
@@ -38,9 +54,9 @@ void	philo_life(t_philo *philo)
 			break ;
 		}
 		philo_put_down_fork(philo);
-		philo->meals_eaten++;
+		finish_meal(philo);
 		if (philo->data->must_eat != -1
-			&& philo->meals_eaten == philo->data->must_eat)
+			&& !philo_alive(philo))
 			break ;
 		philo_print(philo, "is sleeping");
 		if (philo_sleep_time_control(philo) == false)
