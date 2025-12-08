@@ -75,5 +75,7 @@ void				put_down_odd_forks(t_philo *philo);
 void				put_down_even_forks(t_philo *philo);
 bool				philo_sleep_time_control(t_philo *philo);
 void				*death_monitor(void *arg);
+bool				try_lock_second_fork(pthread_mutex_t *fork, t_philo *philo);
+void				release_forks_on_death(t_philo *philo);
 
 #endif

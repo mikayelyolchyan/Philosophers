@@ -23,12 +23,6 @@ static bool	check_philo_death(t_philo *philo)
 		return (true);
 	}
 	pthread_mutex_lock(&philo->meal_mutex);
-	if (philo->data->must_eat != -1 && philo->meals_eaten >= philo->data->must_eat)
-	{
-		pthread_mutex_unlock(&philo->meal_mutex);
-		pthread_mutex_unlock(&philo->data->someone_died_mutex);
-		return (false);
-	}
 	time_diff = get_time_in_ms() - philo->last_meal_time;
 	pthread_mutex_unlock(&philo->meal_mutex);
 	if (time_diff > philo->data->time_to_die)
@@ -53,10 +47,8 @@ static bool	check_meals_done(t_data *data)
 	i = -1;
 	while (++i < data->num_philos)
 	{
-		pthread_mutex_lock(&data->philos[i].meal_mutex);
 		if (data->philos[i].meals_eaten >= data->must_eat)
 			finished++;
-		pthread_mutex_unlock(&data->philos[i].meal_mutex);
 	}
 	if (finished == data->num_philos)
 	{
@@ -68,12 +60,8 @@ static bool	check_meals_done(t_data *data)
 	return (false);
 }
 
-void	*death_monitor(void *arg)
+static void	wait_for_all_ready(t_data *data)
 {
-	t_data	*data;
-	int		i;
-
-	data = (t_data *)arg;
 	while (1)
 	{
 		pthread_mutex_lock(&data->ready_mutex);
@@ -85,17 +73,32 @@ void	*death_monitor(void *arg)
 		pthread_mutex_unlock(&data->ready_mutex);
 		usleep(100);
 	}
+}
+
+static void	monitor_loop(t_data *data)
+{
+	int	i;
+
 	while (1)
 	{
 		i = -1;
 		while (++i < data->num_philos)
 		{
 			if (check_philo_death(&data->philos[i]))
-				return (NULL);
+				return ;
 		}
 		if (check_meals_done(data))
-			return (NULL);
+			return ;
 		usleep(1000);
 	}
+}
+
+void	*death_monitor(void *arg)
+{
+	t_data	*data;
+
+	data = (t_data *)arg;
+	wait_for_all_ready(data);
+	monitor_loop(data);
 	return (NULL);
 }

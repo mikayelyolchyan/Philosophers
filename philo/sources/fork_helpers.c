@@ -23,24 +23,17 @@ bool	take_odd_forks(t_philo *philo)
 		philo->left_fork_taken = false;
 		return (false);
 	}
-	while (pthread_mutex_trylock(philo->right_fork) != 0)
+	if (try_lock_second_fork(philo->right_fork, philo) == false)
 	{
-		if (get_someone_died(philo->data))
-		{
-			pthread_mutex_unlock(philo->left_fork);
-			philo->left_fork_taken = false;
-			return (false);
-		}
-		usleep(10);
+		pthread_mutex_unlock(philo->left_fork);
+		philo->left_fork_taken = false;
+		return (false);
 	}
 	philo->right_fork_taken = true;
 	philo_print(philo, "has taken a fork");
 	if (get_someone_died(philo->data))
 	{
-		pthread_mutex_unlock(philo->left_fork);
-		philo->left_fork_taken = false;
-		pthread_mutex_unlock(philo->right_fork);
-		philo->right_fork_taken = false;
+		release_forks_on_death(philo);
 		return (false);
 	}
 	return (true);
@@ -57,24 +50,17 @@ bool	take_even_forks(t_philo *philo)
 		philo->right_fork_taken = false;
 		return (false);
 	}
-	while (pthread_mutex_trylock(philo->left_fork) != 0)
+	if (try_lock_second_fork(philo->left_fork, philo) == false)
 	{
-		if (get_someone_died(philo->data))
-		{
-			pthread_mutex_unlock(philo->right_fork);
-			philo->right_fork_taken = false;
-			return (false);
-		}
-		usleep(10);
+		pthread_mutex_unlock(philo->right_fork);
+		philo->right_fork_taken = false;
+		return (false);
 	}
 	philo->left_fork_taken = true;
 	philo_print(philo, "has taken a fork");
 	if (get_someone_died(philo->data))
 	{
-		pthread_mutex_unlock(philo->left_fork);
-		philo->left_fork_taken = false;
-		pthread_mutex_unlock(philo->right_fork);
-		philo->right_fork_taken = false;
+		release_forks_on_death(philo);
 		return (false);
 	}
 	return (true);

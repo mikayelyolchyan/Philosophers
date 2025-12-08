@@ -13,7 +13,7 @@
 #include "../includes/headers/philo.h"
 #include "../includes/headers/helpers.h"
 
-bool	ending_destroy(t_data *data)
+static bool	destroy_fork_mutexes(t_data *data)
 {
 	int	i;
 	int	err;
@@ -28,6 +28,13 @@ bool	ending_destroy(t_data *data)
 		if (err != 0)
 			return (ft_putnbr_fd(err, 2), false);
 	}
+	return (true);
+}
+
+static bool	destroy_global_mutexes(t_data *data)
+{
+	int	err;
+
 	err = pthread_mutex_destroy(&data->start_mutex);
 	if (err != 0)
 		return (ft_putnbr_fd(err, 2), false);
@@ -40,5 +47,14 @@ bool	ending_destroy(t_data *data)
 	err = pthread_mutex_destroy(&data->ready_mutex);
 	if (err != 0)
 		return (ft_putnbr_fd(err, 2), false);
+	return (true);
+}
+
+bool	ending_destroy(t_data *data)
+{
+	if (destroy_fork_mutexes(data) == false)
+		return (false);
+	if (destroy_global_mutexes(data) == false)
+		return (false);
 	return (true);
 }

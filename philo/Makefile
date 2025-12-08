@@ -20,6 +20,7 @@ SRCS = $(SRCS_DIR)main.c \
 		$(SRCS_DIR)philo_print.c \
 		$(SRCS_DIR)take_put_forks.c \
 		$(SRCS_DIR)fork_helpers.c \
+		$(SRCS_DIR)fork_utils.c \
 		$(SRCS_DIR)time_control.c \
 		$(SRCS_DIR)time.c \
 		$(SRCS_DIR)death_monitor.c \

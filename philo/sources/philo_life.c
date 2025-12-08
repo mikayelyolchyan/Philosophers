@@ -38,10 +38,9 @@ void	philo_life(t_philo *philo)
 			break ;
 		}
 		philo_put_down_fork(philo);
-		pthread_mutex_lock(&philo->meal_mutex);
 		philo->meals_eaten++;
-		pthread_mutex_unlock(&philo->meal_mutex);
-		if (philo->data->must_eat != -1 && philo->meals_eaten >= philo->data->must_eat)
+		if (philo->data->must_eat != -1
+			&& philo->meals_eaten == philo->data->must_eat)
 			break ;
 		philo_print(philo, "is sleeping");
 		if (philo_sleep_time_control(philo) == false)
