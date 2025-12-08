@@ -14,6 +14,7 @@ SRCS = $(SRCS_DIR)main.c \
 		$(SRCS_DIR)free.c \
 		$(SRCS_DIR)create_join.c \
 		$(SRCS_DIR)philo_life.c \
+		$(SRCS_DIR)mutex_init.c \
 		$(SRCS_DIR)mutex_destroy.c \
 		$(SRCS_DIR)parse.c \
 		$(SRCS_DIR)philo_print.c \
@@ -21,6 +22,7 @@ SRCS = $(SRCS_DIR)main.c \
 		$(SRCS_DIR)fork_helpers.c \
 		$(SRCS_DIR)time_control.c \
 		$(SRCS_DIR)time.c \
+		$(SRCS_DIR)death_monitor.c \
 		$(UTILS_DIR)ft_atoi.c \
 		$(UTILS_DIR)ft_putchar_fd.c \
 		$(UTILS_DIR)ft_putendl_fd.c \

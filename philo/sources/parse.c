@@ -59,6 +59,8 @@ bool	parse_args(t_data *data, char **argv)
 	}
 	else
 		return (ft_putendl_fd("Incorrect arguments", 2), false);
+	if (argv[5] == NULL)
+		data->must_eat = -1;
 	data->someone_died = false;
 	return (true);
 }

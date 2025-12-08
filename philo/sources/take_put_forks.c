@@ -22,16 +22,12 @@ bool	get_someone_died(t_data *data)
 	return (val);
 }
 
-void	philo_take_fork(t_philo *philo)
+bool	philo_take_fork(t_philo *philo)
 {
-	if (philo->data->num_philos % 2 != 0 && philo->id % 2 == 1)
-		usleep(100);
-	else if (philo->data->num_philos % 2 == 0 && philo->id % 2 == 0)
-		usleep(100);
 	if (philo->id % 2 == 1)
-		take_odd_forks(philo);
+		return (take_odd_forks(philo));
 	else
-		take_even_forks(philo);
+		return (take_even_forks(philo));
 }
 
 void	philo_put_down_fork(t_philo *philo)

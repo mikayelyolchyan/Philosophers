@@ -38,11 +38,11 @@ bool	one_philo(t_data *data)
 
 	err = pthread_create(&thread, NULL, one_philo_life_start, &data->philos[0]);
 	if (err != 0)
-		return (ft_putnbr_fd(err, 2), \
+		return (ft_putnbr_fd(err, 2),
 			ft_putstr_fd(" :Thread create error ", 2), false);
 	err = pthread_join(thread, NULL);
 	if (err != 0)
-		return (ft_putnbr_fd(err, 2), \
+		return (ft_putnbr_fd(err, 2),
 			ft_putendl_fd(" :Thread join error", 2), false);
 	return (true);
 }

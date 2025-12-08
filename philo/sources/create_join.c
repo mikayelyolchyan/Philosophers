@@ -21,11 +21,11 @@ bool	create_threads(t_data *data, pthread_t *threads)
 	i = -1;
 	while (++i < data->num_philos)
 	{
-		err = pthread_create(&threads[i], NULL, \
-							philo_life_start, &data->philos[i]);
+		err = pthread_create(&threads[i], NULL,
+				philo_life_start, &data->philos[i]);
 		if (err != 0)
-			return (ft_putnbr_fd(err, 2), \
-					ft_putstr_fd(" :Thread create error ", 2), false);
+			return (ft_putnbr_fd(err, 2),
+				ft_putstr_fd(" :Thread create error ", 2), false);
 	}
 	return (true);
 }
@@ -40,8 +40,8 @@ bool	join_threads(t_data *data, pthread_t *threads)
 	{
 		err = pthread_join(threads[i], NULL);
 		if (err != 0)
-			return (ft_putnbr_fd(err, 2), \
-					ft_putendl_fd(" :Thread join error", 2), false);
+			return (ft_putnbr_fd(err, 2),
+				ft_putendl_fd(" :Thread join error", 2), false);
 	}
 	return (true);
 }
@@ -49,6 +49,7 @@ bool	join_threads(t_data *data, pthread_t *threads)
 bool	create_and_join_threads(t_data *data)
 {
 	pthread_t	*threads;
+	pthread_t	monitor_thread;
 
 	threads = data->threads;
 	if (data->num_philos == 1)
@@ -64,6 +65,8 @@ bool	create_and_join_threads(t_data *data)
 	usleep(data->num_philos * 10000);
 	data->start_time = get_time_in_ms();
 	pthread_mutex_unlock(&data->start_mutex);
+	pthread_create(&monitor_thread, NULL, death_monitor, data);
 	join_threads(data, threads);
+	pthread_join(monitor_thread, NULL);
 	return (true);
 }

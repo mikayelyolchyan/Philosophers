@@ -44,47 +44,6 @@ void	init_philos(t_data *data)
 	}
 }
 
-bool	mutex_init_err(t_data *data, int i)
-{
-	int	err;
-
-	while (--i >= 0)
-	{
-		err = pthread_mutex_destroy(&data->forks[i]);
-		if (err != 0)
-			return (ft_putnbr_fd(err, 2), false);
-	}
-	return (true);
-}
-
-bool	mutex_init(t_data *data)
-{
-	int	i;
-	int	err;
-
-	i = -1;
-	while (++i < data->num_philos)
-	{
-		err = pthread_mutex_init(&data->forks[i], NULL);
-		if (err != 0)
-		{
-			if (mutex_init_err(data, i) == false)
-				return (ft_putendl_fd(" :Mutex destroy error", 2), false);
-			return (ft_putnbr_fd(err, 2), false);
-		}
-	}
-	err = pthread_mutex_init(&data->start_mutex, NULL);
-	if (err != 0)
-		return (ft_putnbr_fd(err, 2), false);
-	err = pthread_mutex_init(&data->print_mutex, NULL);
-	if (err != 0)
-		return (ft_putnbr_fd(err, 2), false);
-	err = pthread_mutex_init(&data->someone_died_mutex, NULL);
-	if (err != 0)
-		return (ft_putnbr_fd(err, 2), false);
-	return (true);
-}
-
 bool	initializations(t_data *data)
 {
 	if (mutex_init(data) == false)

@@ -24,6 +24,9 @@ bool	ending_destroy(t_data *data)
 		err = pthread_mutex_destroy(&data->forks[i]);
 		if (err != 0)
 			return (printf("fork %d ", i), ft_putnbr_fd(err, 2), false);
+		err = pthread_mutex_destroy(&data->philos[i].meal_mutex);
+		if (err != 0)
+			return (ft_putnbr_fd(err, 2), false);
 	}
 	err = pthread_mutex_destroy(&data->start_mutex);
 	if (err != 0)
@@ -32,6 +35,9 @@ bool	ending_destroy(t_data *data)
 	if (err != 0)
 		return (ft_putnbr_fd(err, 2), false);
 	err = pthread_mutex_destroy(&data->someone_died_mutex);
+	if (err != 0)
+		return (ft_putnbr_fd(err, 2), false);
+	err = pthread_mutex_destroy(&data->ready_mutex);
 	if (err != 0)
 		return (ft_putnbr_fd(err, 2), false);
 	return (true);

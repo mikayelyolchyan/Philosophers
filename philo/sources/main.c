@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	if (argc != 5 && argc != 6)
+	if (argc < 5 || argc > 6)
 		return (ft_putendl_fd("Incorrect number of arguments", 2), 1);
 	memset(&data, 0, sizeof(t_data));
 	if (parse_args(&data, argv) == false)
@@ -48,8 +48,8 @@ int	main(int argc, char **argv)
 	}
 	create_and_join_threads(&data);
 	if (ending_destroy(&data) == false)
-		return (ft_putendl_fd(" :Mutex destroy error", 2), \
-				ending_free(&data), 1);
+		return (ft_putendl_fd(" :Mutex destroy error", 2),
+			ending_free(&data), 1);
 	ending_free(&data);
 	return (0);
 }
