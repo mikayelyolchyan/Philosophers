@@ -39,7 +39,7 @@ bool	is_valid(char **argv)
 		if (ft_strlen(argv[args]) > 10)
 			return (false);
 		l = ft_atoll(argv[args]);
-		if (l > INT_MAX || l < 0)
+		if (l > INT_MAX || l <= 0)
 			return (false);
 		args++;
 	}
