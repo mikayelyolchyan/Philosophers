@@ -30,7 +30,7 @@
 For detailed information, refer to the [**subject of this project**](en.subject.pdf).
 
 	🚀 TLDR: This project is an introduction to the basics of multithreading and multiprocessing.
-    	 Work on the same memory space, learn about mutexes, semaphores, and shared memory.
+    	 Work on the same memory space, learn about mutexes and shared memory.
 
 > [!NOTE]  
 > Because of 42 School norm requirements:
@@ -71,12 +71,6 @@ timestamp_in_ms X is thinking
 timestamp_in_ms X died
 ```
 
-## 🌟 Bonus Part
-
-For the bonus part of this project, the problem is the same with a few differences: philosophers are now processes, \
-and the forks are now counting semaphores. The forks are arranged at the center of the table when not in use, and \
-any philosopher can take any fork.
-
 ## 👨‍💻 Usage
 ### Requirements
 
@@ -92,12 +86,6 @@ To compile the mandatoy part, run:
 $ cd path_to/philo && make
 ```
 
-To compile the bonus part, run:
-
-```shell
-$ cd path_to/philo_bonus && make
-```
-
 **2. How to run the program**
 
 Run the program with the following arguments:
@@ -111,5 +99,4 @@ The arguments must be integers between 0 and INT_MAX representing a time in mill
 ./philo 5 800 200 200 7
 ```
 
-If the arguments are valid, the program will output the actions of each philosopher until one of them dies or until all of them have eaten `number_of_times_each_philo_must_eat`, if specified. \
-Bonus part takes the same arguments, but needs to run executalbe `philo_bonus` instead of `philo`.
+If the arguments are valid, the program will output the actions of each philosopher until one of them dies or until all of them have eaten `number_of_times_each_philo_must_eat`, if specified.
